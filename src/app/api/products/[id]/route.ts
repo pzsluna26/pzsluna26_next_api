@@ -136,11 +136,11 @@ export async function PATCH(request : NextRequest, {params}: ParamsProps) {
 export async function DELETE(request : NextRequest, {params}: ParamsProps) {
     try{
 
-        const products = await getProducts();
+        const products : Product[] = await getProducts();
         const {id} = await params;
 
         // API구현방법1. 삭제할 ID의 인덱스 값을 찾기
-        const updateProduct =products.findIndex(item => item.id !== id);
+        const updateProduct : Product[] =products.filter(item => item.id !== id);
 
         // API구현방법2. 필터링: 삭제할 ID가 없는 경우
         if(products.length === updateProduct.length){
@@ -148,9 +148,9 @@ export async function DELETE(request : NextRequest, {params}: ParamsProps) {
         }
 
         // API구현방법3. 삭제된 상품목록을 기존목록에 저장(SAVE함수 호출)
-        await saveProducts(products);
-        console.log(products[productIdx])
-        return NextResponse.json({message: "상품이 삭제 되었습니다.", product: products[productIdx]});
+        await saveProducts(updateProduct);
+        console.log("업데이트된 목록:", updateProduct)
+        return NextResponse.json({message: "상품이 삭제 되었습니다.", product: updateProduct});
     
     } catch (error) {
         console.error("파일 불러오기 오류: ", error);
