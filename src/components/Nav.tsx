@@ -26,7 +26,7 @@ export default function Nav() {
     setLogin(false);
     localStorage.removeItem("id");
     // useRouter
-    router.push("/");
+    router.push("/Home");
   }
   return (
      <header className="w-full min-h-20 flex justify-between items-center bg-blue-200 ">
