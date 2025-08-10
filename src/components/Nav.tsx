@@ -33,18 +33,13 @@ export default function Nav() {
           <div className="flex ml-10">
 
             {/* 이미지태그는 src, width, height, alt 속성을 반드시 가짐 */}
-            <Image src="/img/react.svg" width={40} height={40} alt='react'/> +
+            <Image src="/img/react.svg" width={40} height={40} alt='react' className='mr-2'/> 
             <Image src="/next.svg" width={60} height={60} alt='nextjs'/>
           </div>
           <div className="text-gray-600 font-bold text-xs">
             <ul className="flex justify-center items-center">
-              <Link href = "/"><li className="px-2 hover:bg-amber-100 rounded-xl hover:text-black">홈으로</li></Link>
-             
-             {login && <Link href ='/myClock'><li className="px-2 hover:bg-amber-100 rounded-xl hover:text-black">시계</li></Link>}
-             {login && <Link href ='/lotto'><li className="px-2 hover:bg-amber-100 rounded-xl hover:text-black">로또</li></Link>}
-             {login && <Link href ='/foodMain'><li className="px-2 hover:bg-amber-100 rounded-xl hover:text-black">푸드</li></Link>}
-             {login && <Link href = "/subway"><li className="px-2 hover:bg-amber-100 rounded-xl hover:text-black">지하철 대기정보</li></Link>}
-             {login && <Link href ='/todoList'><li className="px-2 hover:bg-amber-100 rounded-xl hover:text-black">할 일 목록</li></Link>}
+              <Link href = "/Home"><li className="px-2 hover:bg-amber-100 rounded-xl hover:text-black">홈으로</li></Link>
+              {login && <Link href="/product">상품목록</Link>}
             </ul>
           </div>
           <div className="mr-10 text-xs font-bold p-4 bg-blue-300 text-white rounded-xl">
@@ -53,7 +48,7 @@ export default function Nav() {
             login ? <span className="cursor-pointer"
                             onClick={handleLogout}>로그아웃</span> 
                             // 홈화면 (로그인폼)
-                  :  <Link href="/" className="cursor-pointer text-white">로그인</Link>
+                  :  <Link href="/Login" className="cursor-pointer text-white">로그인</Link>
             }
           </div>
           

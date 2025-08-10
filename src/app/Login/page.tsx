@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { isLogin } from '../atoms/IsLoginAtom'
+import { isLogin } from '@/atoms/IsLoginAtom'
 import { useAtom } from 'jotai';
 
 // useNavigate => useRouter
@@ -47,6 +47,7 @@ export default function Login() {
         alert("로그인 성공!");
         setLogin(true);
         localStorage.setItem("id", email);
+        router.push("/Home")
         return;
 
       }
