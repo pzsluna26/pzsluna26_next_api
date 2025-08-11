@@ -1,7 +1,38 @@
-export default async function Hello() {
+'use client'
+import { useState, useEffect } from 'react';
+
+type helloT = {
+  msg : string
+}
+
+export default function Hello() {
+  const [tdata, setTdata] = useState<helloT[]|null>(null);
+  
+  const getFetchData = async () => {
+    const resp = await fetch('http://localhost:3000/api/hello')
+    const data = await resp.json();
+    setTdata(data);
+  }
+
+  useEffect(() => {
+    getFetchData();
+  },[])
+
+  useEffect(()=>{
+
+  },[tdata])
   return (
     <div className="flex flex-col justify-center items-center w-full h-screen">
-      <h1 className="text-2xl">안녕하세요</h1>
+      <h1 className="text-2xl">
+        {
+        tdata && tdata.map(
+                          (item:helloT) =>
+                                   <div key={item.msg}>
+                                      {item.msg}
+                                   </div>
+                          )
+        }
+      </h1>
     </div>
   );
 }

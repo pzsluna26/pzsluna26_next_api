@@ -9,11 +9,11 @@ import { promises as fs } from "fs";
 import type { Product } from "@/app/types/products";
 import { NestedMiddlewareError } from "next/dist/build/utils";
 // API구현방법1. GET (Id)동적라우팅으로 들어오는 params의 데이터 타입
-interface ParamsProps{
-    params: {
-        id: string;
-    }
-}
+// interface ParamsProps{
+//     params: {
+//         id: string;
+//     }
+// }
 // API구현방법1-1. CRUD를 구현할 'JSON파일'의 경로 만들기
 const dataPath = path.join(process.cwd(), 'src/app/data/products.json');
 
@@ -30,8 +30,12 @@ async function saveProducts(products: Product[]) {
 
 // ---------------------------------------------------------------------------  
 
-                                            // API구현방법1-2. 동적라우팅[id]
-export async function GET(request : NextRequest, {params}: ParamsProps) {
+
+
+                                                       // API구현방법1-2. 동적라우팅[id] 
+                                                       // params 는 interface하지말고 인라인으로 잡아야함.
+export async function GET(request : NextRequest, {params}: {params : Promise<{id : string}>}) {
+    
     try{
 
         // API구현방법2. json 파일 불러와서 JSON 파싱하기(GET함수 호출)
@@ -55,7 +59,7 @@ export async function GET(request : NextRequest, {params}: ParamsProps) {
     } catch (error) {
         console.error("파일 불러오기 오류: ", error);
         return NextResponse.json({message: "시스템오류"},{status:500});
-    }
+    } 
 }
 
 // ---------------------------------------------------------------------------
@@ -63,7 +67,7 @@ export async function GET(request : NextRequest, {params}: ParamsProps) {
 //                              : 데이터 전체 수정
 // ---------------------------------------------------------------------------
 
-export async function PUT(request : NextRequest, {params}: ParamsProps) {
+export async function PUT(request : NextRequest, {params}: {params : Promise<{id : string}>}) {
     try{
 
         // API구현방법1. json 파일 불러와서 JSON 파싱하기(GET함수 호출)
@@ -99,7 +103,7 @@ export async function PUT(request : NextRequest, {params}: ParamsProps) {
 //                           API 구현 방법 => PATCH
 //                              : 데이터 일부 수정  
 // ---------------------------------------------------------------------------
-export async function PATCH(request : NextRequest, {params}: ParamsProps) {
+export async function PATCH(request : NextRequest, {params}: {params : Promise<{id : string}>}) {
     try{
 
     
@@ -133,7 +137,7 @@ export async function PATCH(request : NextRequest, {params}: ParamsProps) {
 //                           API 구현 방법 => DELETE
 //                              : 데이터 삭제
 // ---------------------------------------------------------------------------
-export async function DELETE(request : NextRequest, {params}: ParamsProps) {
+export async function DELETE(request : NextRequest, {params}: {params : Promise<{id : string}>}) {
     try{
 
         const products : Product[] = await getProducts();
