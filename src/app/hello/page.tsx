@@ -1,3 +1,5 @@
+//클라이언트 컴포넌트 버전
+
 'use client'
 import { useState, useEffect } from 'react';
 
@@ -9,7 +11,9 @@ export default function Hello() {
   const [tdata, setTdata] = useState<helloT[]|null>(null);
   
   const getFetchData = async () => {
-    const resp = await fetch('http://localhost:3000/api/hello')
+    // 환경변수에 api주소 넣기 
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+    const resp = await fetch(`${baseUrl}/api/hello`)
     const data = await resp.json();
     setTdata(data);
   }
