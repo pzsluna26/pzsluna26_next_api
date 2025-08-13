@@ -39,7 +39,7 @@ export default function Nav() {
           <div className="text-gray-600 font-bold text-xs">
             <ul className="flex justify-center items-center">
               <Link href = "/Home"><li className="px-2 hover:bg-amber-100 rounded-xl hover:text-black">홈으로</li></Link>
-              {login && <Link href="/product">상품목록</Link>}
+              {login && <Link href="/product2">상품목록</Link>}
             </ul>
           </div>
           <div className="mr-10 text-xs font-bold p-4 bg-blue-300 text-white rounded-xl">
