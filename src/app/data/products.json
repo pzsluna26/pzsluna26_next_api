@@ -1,12 +1,5 @@
 [
   {
-    "id": "124",
-    "name": "울트라부스트 2ㄴㅇㄹㄴㅇㄹ2",
-    "category": "수정2",
-    "price": 149000,
-    "description": "얘만 수정!"
-  },
-  {
     "id": "202",
     "name": "데님 팬츠",
     "category": "clothes",
@@ -26,5 +19,12 @@
     "category": "shoes",
     "price": 129000,
     "description": "편안한 구두"
+  },
+  {
+    "id": "1755113369041",
+    "name": "셔츠",
+    "category": "셔츠",
+    "price": 20000,
+    "description": "심플한셔츠"
   }
 ]
