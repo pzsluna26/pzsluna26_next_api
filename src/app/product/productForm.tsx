@@ -1,8 +1,8 @@
 'use client'
 import type {Product} from "@/app/types/products"
 import { useActionState } from "react"
-import type {FormStatus} from "@/actions"
-import {createProductAction, updateProductAction} from "../actions"
+import type {FormStatus} from "@/app/actions"
+import {createProductAction, updateProductAction} from "@/app/actions"
 import SubmitButton from "./submitButton.tsx/page"
 
 interface ProductFormProps{

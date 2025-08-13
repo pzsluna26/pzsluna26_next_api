@@ -16,7 +16,7 @@ export default function ProductDel({id}:ProductDelProps) {
       });
       if(resp.ok){
         alert("정상적으로 삭제되었습니다");
-        router.push("/product2")
+        router.push("/product")
         router.refresh();
       }
       else {
