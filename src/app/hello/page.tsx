@@ -1,42 +1,33 @@
-//클라이언트 컴포넌트 버전
+//supabase
+import {supabase} from '@/app/lib/supabase/clients'
+import type {Product} from "@/app/types/products"
+import Link from 'next/link';
 
-'use client'
-import { useState, useEffect } from 'react';
+export default async function Hello() {
+  console.log('PAGE 컴포넌트 환경변수:', {
+  url: process.env.NEXT_PUBLIC_SUPABASE_URL,
+  key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+});
+  const { data, error } = await supabase
+  .from('products')
+  .select('*');
 
-type helloT = {
-  msg : string
-}
-
-export default function Hello() {
-  const [tdata, setTdata] = useState<helloT[]|null>(null);
-  
-  const getFetchData = async () => {
-    // 환경변수에 api주소 넣기 
-    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
-    const resp = await fetch(`${baseUrl}/api/hello`)
-    const data = await resp.json();
-    setTdata(data);
+  if(error) {
+    return <div>Error.message</div>
   }
+  console.log(data)
 
-  useEffect(() => {
-    getFetchData();
-  },[])
+return (
+  <div className="flex flex-col justify-center items-center w-full h-screen">
+    <h1 className="text-2xl">
+      Supabase test
+      {data && data.map((item: Product) => (
+        <Link href={`/hello/${item.id}`} key={item.id}>
+          <div>{item.name}</div>
+        </Link>
+      ))}
+    </h1>
+  </div>
+);
 
-  useEffect(()=>{
-
-  },[tdata])
-  return (
-    <div className="flex flex-col justify-center items-center w-full h-screen">
-      <h1 className="text-2xl">
-        {
-        tdata && tdata.map(
-                          (item:helloT) =>
-                                   <div key={item.msg}>
-                                      {item.msg}
-                                   </div>
-                          )
-        }
-      </h1>
-    </div>
-  );
 }

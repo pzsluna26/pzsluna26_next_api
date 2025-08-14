@@ -1,5 +1,7 @@
 'use server'
-
+// 서버액션 지시어
+// form -> submit -> use server
+import { supabase } from '@/app/lib/supabase/clients'
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation"; 
 
@@ -7,51 +9,56 @@ export interface FormStatus {
     message : string
 }
 
-export async function createProductAction(preState : FormStatus, formData : FormData) : Promise<FormStatus> {
+// create (생성)
+export async function addProduct(formData:FormData) {
     const name = formData.get('name');
     const category = formData.get('category');
     const price = parseInt(String(formData.get('price')?? '0'));
     const description = formData.get('description');
 
-    console.log('createProductAction', name)
-    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
-    const resp = await fetch(`${baseUrl}/api/products`, 
-        {method: "POST",
-         headers : {
-            'Content-type' : 'application/json'
-         },
-         body:JSON.stringify({name,category,price,description})   
-        });
-
-        if (!resp.ok) {
-            const data = resp.json();
-            return {message : `API오류 : ${data}`}
-        }
-        revalidatePath('/product')
-        redirect('/product')
+    // 추가될 자료의 Id 생성
+    const newId = Date.now().toString();
+    await supabase.from('products').insert({
+        id : newId,
+        name,
+        category,
+        price: parseInt(String(price)),
+        description
+    })
+    
+    // 서버 컴포넌트에서 라우팅 (경로변경)
+    revalidatePath('/supaproduct')
+    redirect('/supaproduct')
 }
 
-export async function updateProductAction(preState : FormStatus, formData : FormData) : Promise<FormStatus> {
-    const id = formData.get('id');
-    const name = formData.get('name');
-    const category = formData.get('category');
-    const price = parseInt(String(formData.get('price')?? '0'));
-    const description = formData.get('description');
+// Update (수정)
+export async function updateProduct(formData : FormData) {
+    const id = formData.get('id') as string;
+    const name = formData.get('name') as string;
+    const category = formData.get('category') as string;
+    const price =formData.get('price') as string;
+    const description = formData.get('description') as string;
 
-    console.log('updateProductAction', name)
-    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000'; 
-    const resp = await fetch(`${baseUrl}/api/products/${id}`, 
-        {method: "PUT",
-         headers : {
-            'Content-type' : 'application/json'
-         },
-         body:JSON.stringify({name,category,price,description})   
-        });
+    await supabase
+        .from('paoducts')
+        .update({name, category, price: parseInt(price), description})
+        .eq('id', id);
 
-        if (!resp.ok) {
-            const data = resp.json();
-            return {message : `API오류 : ${data}`}
-        }
-        revalidatePath(`/product/${id}`)
-        redirect(`/product`)
+    // 서버 컴포넌트에서 라우팅 (경로변경)
+    revalidatePath('/supaproduct')
+    redirect('/supaproduct')
+}
+
+// Delete (삭제)
+export async function deleteProduct(formData : FormData) {
+    const id = formData.get('id') as string;
+
+    await supabase
+        .from('products')
+        .delete()
+        .eq('id', id);
+        
+    // 서버 컴포넌트에서 라우팅 (경로변경)
+    revalidatePath('/supaproduct')
+    redirect('/supaproduct')
 }

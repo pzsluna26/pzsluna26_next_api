@@ -3,17 +3,19 @@ import type {Product} from "@/app/types/products"
 import { useActionState } from "react"
 import type {FormStatus} from "@/app/actions"
 import {createProductAction, updateProductAction} from "@/app/actions"
-import SubmitButton from "./submitButton.tsx/page"
+import SubmitButton from "@/app/product/submitButton"
 
+// 데이터가 있을 수 도 있고 없을 수 도 있을 때 => ?
 interface ProductFormProps{
     product?: Product;
 }
 
 export default function ProductForm({product}:ProductFormProps) {
     const isEditMode = product != null;
-
+                        // product가 있으면 수정모드, 없으면 입력모드
     const actionUse = isEditMode? updateProductAction : createProductAction;
     const initState : FormStatus = {message: ''};
+    //useActionState [상태,폼액션값]
     const [state, formAction] = useActionState(actionUse,initState);
 
   return (
