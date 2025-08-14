@@ -1,45 +1,39 @@
+'use client';
 
-"use client";
-
-import React, { useEffect, useState } from "react";
-import RestaurantCard from "./restaurantCard";
-
-
-interface RestaurantItem {
-  UC_SEQ: number;
-  MAIN_TITLE: string;
-  ADDR1: string;
-  CNTCT_TEL: string;
-  ITEMCNTNTS: string;
-}
+import { useEffect, useState } from 'react';
+import RestaurantCard from './restaurantCard';
 
 export default function FoodData() {
-  const [data, setData] = useState<RestaurantItem[]| null>(null);
+  const [items, setItems] = useState<any[]>([]);
+
+
+  const fetchFoodData = async () => {
+    try {
+      const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+      const res = await fetch(
+        `https://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=${apiKey}&pageNo=1&numOfRows=10&resultType=json`
+      );
+      const json = await res.json();
+      console.log(json); // 구조 확인
+      setItems(json.getFoodKr?.item || []);
+    } catch (error) {
+      console.error('데이터 불러오기 실패:', error);
+    }
+  };
 
   useEffect(() => {
-    fetch(
-      "https://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=3%2BE64HB9bUOY0%2BkENLpf5w9Uk98vLoG4XULi9AjodZWxJpAFaeggyJGYnMdjYepgzAO%2Bjv%2FAty5BZhgDBQfdyw%3D%3D&pageNo=1&numOfRows=10&resultType=json"
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        console.log("받아온 데이터:", json);
-        setData(json);
-      })
-      .catch((err) => console.error("에러 발생:", err));
+    fetchFoodData();
   }, []);
 
   return (
-   
-    <div className="flex flex-col items-center justify-center w-9/10 h-screen">
-            <div className='flex w-full items-center justify-between mb-10'>
-                <h1 className="text-xl font-bold text-gray-600">부산 맛집 리스트</h1>
-            </div>
-            <div className='grid grid-cols-4 gap-2 w-full'>
-                {
-                    data && data.map(item => 
-                        <RestaurantCard key={item.UC_SEQ} item={item} />
-                   )}
-            </div>
-        </div>
+    <div className="grid grid-cols-4 gap-2 w-full">
+      {items.length > 0 ? (
+        items.map((item) => (
+          <RestaurantCard key={item.UC_SEQ} item={item} />
+        ))
+      ) : (
+        <p>로딩 중...</p>
+      )}
+    </div>
   );
 }
