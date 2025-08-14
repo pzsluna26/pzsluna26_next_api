@@ -6,7 +6,7 @@ import RestaurantCard from './restaurantCard';
 export default function FoodData() {
   const [items, setItems] = useState<any[]>([]);
 
-
+  // 데이터 가져오는 함수
   const fetchFoodData = async () => {
     try {
       const apiKey = process.env.NEXT_PUBLIC_API_KEY;
@@ -26,14 +26,18 @@ export default function FoodData() {
   }, []);
 
   return (
-    <div className="grid grid-cols-4 gap-2 w-full">
-      {items.length > 0 ? (
-        items.map((item) => (
-          <RestaurantCard key={item.UC_SEQ} item={item} />
-        ))
-      ) : (
-        <p>로딩 중...</p>
-      )}
-    </div>
+    <>
+      <h1 className="text-xl font-bold text-gray-600 mb-10 ">부산 맛집 리스트👩🏻‍🍳</h1>
+      <div className="grid grid-cols-4 gap-2 w-9/10 ">
+        {items.length > 0 ? (
+          items.map((item) => (
+            <RestaurantCard key={item.UC_SEQ} item={item} />
+          ))
+        ) : (
+          <p>로딩 중...</p>
+        )}
+      </div>
+    </>
+
   );
 }
