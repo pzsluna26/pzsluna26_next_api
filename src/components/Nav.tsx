@@ -34,12 +34,23 @@ export default function Nav() {
 
             {/* 이미지태그는 src, width, height, alt 속성을 반드시 가짐 */}
             <Image src="/img/react.svg" width={40} height={40} alt='react' className='mr-2'/> 
-            <Image src="/next.svg" width={60} height={60} alt='nextjs'/>
+            <Image src="/next.svg" width={60} height={60} alt='nextjs'></Image>
           </div>
           <div className="text-gray-600 font-bold text-xs">
-            <ul className="flex justify-center items-center">
+            <ul className="flex justify-center items-center gap-3">
               <Link href = "/Home"><li className="px-2 hover:bg-amber-100 rounded-xl hover:text-black">홈으로</li></Link>
-              {login && <Link href="/product2">상품목록</Link>}
+              {/* {login && <Link href="/product" className='mr-1 text-blue'>🎁서버</Link>}
+              {login && <Link href="/reactproduct">🎁클라이언트</Link>}
+              {login && <Link href="/supaproduct">🎁DB(supabase)</Link>}
+              {login && <Link href="/" className='mr-1 text-blue'>🐽서버</Link>}
+              {login && <Link href="/restaurant">🐽클라이언트</Link>}
+              {login && <Link href="/">🐽DB(supabase)</Link>} */}
+              <Link href="/product" className='mr-1 text-blue'>🎁서버</Link>
+              <Link href="/reactproduct">🎁클라이언트</Link>
+              <Link href="/supaproduct">🎁DB(supabase)</Link>
+              <Link href="/" className='mr-1 text-blue'>🐽서버</Link>
+              <Link href="/restaurant">🐽클라이언트</Link>
+              <Link href="/">🐽DB(supabase)</Link>
             </ul>
           </div>
           <div className="mr-10 text-xs font-bold p-4 bg-blue-300 text-white rounded-xl">

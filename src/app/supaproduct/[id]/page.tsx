@@ -1,5 +1,5 @@
-import { supabase } from "@/app/lib/supabase/clients";
-import ProductDel from "@/app/supaproduct/productDel";
+import { supabase } from "@/lib/supabase/clients";
+import ProductDel from "@/app/supaproduct/productDel"
 import Link from "next/link";
 
 export default async function HelloId({ params }: { params: { id: string } }) {

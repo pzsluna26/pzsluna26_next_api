@@ -1,5 +1,5 @@
 //supabase
-import {supabase} from '@/app/lib/supabase/clients'
+import {supabase} from '@/lib/supabase/clients'
 import type {Product} from "@/app/types/products"
 import Link from 'next/link';
 

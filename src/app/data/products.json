@@ -1,12 +1,5 @@
 [
   {
-    "id": "202",
-    "name": "데님 팬츠",
-    "category": "clothes",
-    "price": 59000,
-    "description": "트렌디한 핏의 데일리 데님 팬츠"
-  },
-  {
     "id": "1754619267291",
     "name": "구두",
     "category": "shoes",
@@ -26,5 +19,12 @@
     "category": "셔츠",
     "price": 20000,
     "description": "심플한셔츠"
+  },
+  {
+    "id": "1755176279637",
+    "name": "ㄴㄹㄴㅇㄹ",
+    "category": "ㄹㄴㅇㄹ",
+    "price": null,
+    "description": "ㄹㅇㄴㄹ"
   }
 ]

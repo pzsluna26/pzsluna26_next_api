@@ -1,7 +1,7 @@
 'use server'
 // 서버액션 지시어
 // form -> submit -> use server
-import { supabase } from '@/app/lib/supabase/clients'
+import { supabase } from '@/lib/supabase/clients'
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation"; 
 

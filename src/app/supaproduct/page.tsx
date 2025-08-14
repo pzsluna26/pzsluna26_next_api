@@ -1,5 +1,5 @@
 //supabase
-import {supabase} from '@/app/lib/supabase/clients'
+import {supabase} from '@/lib/supabase/clients'
 import type {Product} from "@/app/types/products"
 import Link from 'next/link';
 
@@ -27,7 +27,7 @@ return (
             상품추가
           </Link>
       </div>
-      <div className='gap-2 w-full border border-gray-400 rounded-2xl p-10'>
+      <div className='gap-2 w-full border border-gray-400 text-gray-600 rounded-2xl p-10'>
         {
           data && data.map((item: Product) => (
                   <Link href={`/supaproduct/${item.id}`} key={item.id}>

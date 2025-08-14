@@ -16,9 +16,9 @@ async function getProduct(id: string): Promise<Product> {
 export default async function EditProduct({
   params
 }: {
-  params: Promise <{ id: string }>
+  params: { id: string }
 }) {
-  const { id } = await params;
+  const { id } = params;
   const product = await getProduct(id);
 
   return (
@@ -29,7 +29,7 @@ export default async function EditProduct({
           상품목록
         </Link>
       </div>
-      <ProductForm />
+      <ProductForm product={product} />
     </div>
   );
 }
