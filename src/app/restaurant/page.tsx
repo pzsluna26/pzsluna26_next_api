@@ -2,10 +2,19 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import RestaurantCard from "./restaurantCard";
 
+
+interface RestaurantItem {
+  UC_SEQ: number;
+  MAIN_TITLE: string;
+  ADDR1: string;
+  CNTCT_TEL: string;
+  ITEMCNTNTS: string;
+}
 
 export default function FoodData() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<RestaurantItem[]| null>(null);
 
   useEffect(() => {
     fetch(
@@ -26,10 +35,10 @@ export default function FoodData() {
                 <h1 className="text-xl font-bold text-gray-600">부산 맛집 리스트</h1>
             </div>
             <div className='grid grid-cols-4 gap-2 w-full'>
-                {/* {
-                    data && data.map(item => (
-                        <ProductCard key={.id} product={product} />
-                    ))} */}
+                {
+                    data && data.map(item => 
+                        <RestaurantCard key={item.UC_SEQ} item={item} />
+                   )}
             </div>
         </div>
   );
