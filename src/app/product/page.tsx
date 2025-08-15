@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 async function getProducts() : Promise<Product[]> {
     const res = await fetch('http://localhost:3000/api/products',{
+        // 최신데이터 업데이트 위함
         cache: 'no-store'
     });
 

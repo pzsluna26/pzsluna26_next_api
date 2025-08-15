@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Product } from '@/app/types/products';
 import Link from 'next/link';
 import ProductCard from '../product/prouductCard';
@@ -15,7 +15,7 @@ export default function ReactProduct() {
         }
         const data = await res.json();
         setTdata(data);
-        console.log(res);
+        console.log(data);
     }
 
     useEffect(() => {
