@@ -14,7 +14,8 @@ export default function Restaurant() {
 
   const getFecthdata = async() => {
     const apikey = process.env.NEXT_PUBLIC_API_KEY;
-    const resp = await fetch(`https://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=${apikey}&pageNo=1&numOfRows=10&resultType=json`)
+    const baseUrl='https://apis.data.go.kr/6260000/FoodService/getFoodKr?'
+    const resp = await fetch(`${baseUrl}serviceKey=${apikey}&pageNo=1&numOfRows=10&resultType=json`)
     if (!resp.ok){
       throw new Error('fetch error')
     }

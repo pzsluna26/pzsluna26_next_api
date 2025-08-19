@@ -4,10 +4,6 @@ import type {Product} from "@/app/types/products"
 import Link from 'next/link';
 
 export default async function Product() {
-  console.log('PAGE 컴포넌트 환경변수:', {
-  url: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-});
   const { data, error } = await supabase
   .from('products')
   .select('*');
